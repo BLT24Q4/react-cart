@@ -13,10 +13,14 @@ function App() {
     { id: 3, name: "쪽파", isBought: true },
     { id: 4, name: "고춧가루", isBought: false },
   ]);
+  //  산 물건 보기 여부를 체크할 state
+  const [showBoughtItems, setShowBoughtItems] = useState(true);
 
   //  isBought === false인 것만 필터링
   //  isBought === false인 것들
   const shopItems = itemList.filter((item) => !item.isBought);
+  //  isBought === true인 것들의 목록
+  const boughtItems = itemList.filter((item) => item.isBought);
 
   //  id => isBought를 true <-> false
   const toggleBought = (id) => {
@@ -51,9 +55,17 @@ function App() {
         />
 
         <CartInput />
-        <input type="checkbox" id="show-bought-items" checked={true} />
+        <input
+          type="checkbox"
+          id="show-bought-items"
+          checked={showBoughtItems}
+          onChange={(event) => setShowBoughtItems(event.target.checked)}
+        />
         <label>산 물건 보기</label>
-        <BoughtList />
+        {/* 선택적 렌더링 */}
+        {showBoughtItems && (
+          <BoughtList items={boughtItems} toggleBought={toggleBought} />
+        )}
       </main>
       <CartFooter />
     </div>
