@@ -96,9 +96,23 @@ function App() {
   };
 
   //  id => item 삭제
-  const deleteItem = (id) => {
-    const newItemList = itemList.filter((item) => item.id !== id);
-    setItemList(newItemList);
+  const deleteItem = async (id) => {
+    // const newItemList = itemList.filter((item) => item.id !== id);
+    // setItemList(newItemList);
+    //  DELETE method로 요청
+    try {
+      const response = await fetch(`${apiUrl}/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("아이템을 삭제하지 못했습니다.");
+      }
+      //  목록 갱신
+      fetchItems();
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    }
   };
 
   return (
