@@ -8,7 +8,8 @@ import CartFooter from "./components/CartFooter";
 
 function App() {
   // const apiUrl = "http://localhost:1337/shoplist";
-  const apiUrl = "http://localhost:3000/shoplist";
+  // const apiUrl = "http://localhost:3000/shoplist";
+  const apiUrl = "http://localhost:8088/api/shoplist";
   //  서버로부터 API 호출해서 쇼핑 목록 받아오기
   // const [itemList, setItemList] = useState([
   //   { id: 1, name: "무", isBought: false },
@@ -47,6 +48,7 @@ function App() {
       setIsLoading(false); //  로딩이 끝남
     }
   };
+
   useEffect(() => {
     fetchItems();
   }, []); //  -> 컴포넌트가 처음 로딩되었을 때의 이펙트 발생
